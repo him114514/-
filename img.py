@@ -11,24 +11,25 @@ while True:
 
         depth = 10.             
         grad = np.gradient(a)   
-        grad_x, grad_y = grad   
+        gradx, grady = grad   
 
 
-        grad_x = grad_x * depth / 100.
-        grad_y = grad_y * depth / 100. 
+        gradx = gradx * depth / 100.
+        grady = grady * depth / 100. 
     
-        A = np.sqrt(grad_x ** 2 + grad_y ** 2 + 1.)
-        uni_x = grad_x / A 
-        uni_y = grad_y / A 
-        uni_z = 1./ A
+        A = np.sqrt(gradx ** 2 + grady ** 2 + 1.)
+        unix = gradx / A 
+        uniy = grady / A 
+        uniz = 1./ A
 
-        vec_el = np.pi / 2.1                    
-        vec_az = np.pi / 4.                     
-        dx = np.cos(vec_el) * np.cos(vec_az)    
-        dy = np.cos(vec_el) * np.sin(vec_az)    
-        dz = np.sin(vec_el)                     
 
-        b = 255 * (dx * uni_x + dy * uni_y + dz * uni_z) 
+        a = np.pi / 2.1                    
+        c = np.pi / 4.                     
+        dx = np.cos(a) * np.cos(c)    
+        dy = np.cos(a) * np.sin(c)    
+        dz = np.sin(a)                     
+
+        b = 255 * (dx * unix + dy * uniy + dz * uniz) 
         b = b.clip(0, 255)                              
         im = Image.fromarray(b.astype( 'uint8'))         
         im.save(outimg)
